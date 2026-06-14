@@ -1,0 +1,23 @@
+{
+  "name": "playwright_testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PearlPhahlane/playwright_testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PearlPhahlane/playwright_testing/issues"
+  },
+  "homepage": "https://github.com/PearlPhahlane/playwright_testing#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.3"
+  }
+}
