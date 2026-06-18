@@ -1,13 +1,14 @@
 const { test, expect } = require ('@playwright/test');
 const { LoginPage } = require ('../pages/LoginPage');
 const { DashboardPage } = require ('../pages/DashboardPage');
+const { validUser, invalidUser } = require('../utils/testData');
 
 test.describe('Login tests', () => {
     test('user can login with valid credentials', async ( {page}) => {
         const loginPage = new LoginPage(page);
 
         await loginPage.goto();
-        await loginPage.login('standard_user', 'secret_sauce');
+        await loginPage.login(validUser.username, validUser.password);
 
         await expect(page).toHaveURL(/inventory/);
     });
@@ -16,7 +17,7 @@ test.describe('Login tests', () => {
         const loginPage = new LoginPage(page);
         
         await loginPage.goto();
-        await loginPage.login('wrong_user', 'wrong password');
+        await loginPage.login(invalidUser.username, invalidUser.password);
 
         await expect(loginPage.errorMessage).toBeVisible();        
     });
@@ -27,7 +28,7 @@ test.describe('Login tests', () => {
         const dashboardPage = new DashboardPage(page);
 
         await loginPage.goto();
-        await loginPage.login('standard_user', 'secret_sauce');
+        await loginPage.login(validUser.username, validUser.password);
         await dashboardPage.verifyLoaded();
 
         await expect(page).toHaveURL(/inventory/);
@@ -39,7 +40,7 @@ test.describe('Login tests', () => {
         const dashboardPage = new DashboardPage(page);
 
         await loginPage.goto();
-        await loginPage.login('standard_user', 'secret_sauce');
+        await loginPage.login(validUser.username, validUser.password);
         await dashboardPage.verifyLoaded();
         await dashboardPage.logout();
 
