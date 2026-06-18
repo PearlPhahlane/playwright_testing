@@ -17,9 +17,8 @@ test.describe('Login tests', () => {
         await loginPage.goto();
         await loginPage.login('wrong_user', 'wrong password');
 
-        await expect(loginPage.errorMessage).toBeVisible();
+        await expect(loginPage.errorMessage).toBeVisible();        
     });
-
 });
 
 /*test('user can login with valid credentials', async ({ page }) => {
