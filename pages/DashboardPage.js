@@ -9,7 +9,7 @@ class DashboardPage {
 
     }
     async verifyLoaded() {
-        await this.inventoryList.waitFor();
+        await this.inventoryList.first().waitFor();
     }
     async addFirstItemToCart() {
         await this.firstAddToCartButton.click();

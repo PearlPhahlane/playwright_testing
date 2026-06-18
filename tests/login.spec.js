@@ -12,7 +12,7 @@ test.describe('Login tests', () => {
         await expect(page).toHaveURL(/inventory/);
     });
 
-    test('user cannot login with invalid credentials', async ( { page}) => {
+   test('user cannot login with invalid credentials', async ( { page}) => {
         const loginPage = new LoginPage(page);
         
         await loginPage.goto();
@@ -32,6 +32,20 @@ test.describe('Login tests', () => {
 
         await expect(page).toHaveURL(/inventory/);
     });
+
+    //test to see if user can logout
+    test('logged in user can logout', async ( { page } ) => {
+        const loginPage = new LoginPage(page);
+        const dashboardPage = new DashboardPage(page);
+
+        await loginPage.goto();
+        await loginPage.login('standard_user', 'secret_sauce');
+        await dashboardPage.verifyLoaded();
+        await dashboardPage.logout();
+
+        await expect(page).toHaveURL('https://www.saucedemo.com/');
+    })
+
 
 });
 
