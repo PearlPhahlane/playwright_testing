@@ -1,5 +1,6 @@
 const { test, expect } = require ('@playwright/test');
 const { LoginPage } = require ('../pages/LoginPage');
+const { DashboardPage } = require ('../pages/DashboardPage');
 
 test.describe('Login tests', () => {
     test('user can login with valid credentials', async ( {page}) => {
@@ -19,6 +20,19 @@ test.describe('Login tests', () => {
 
         await expect(loginPage.errorMessage).toBeVisible();        
     });
+
+    //test if user can reach the dashboard page after login
+    test('logged in user sees dashboard page', async ( { page } ) => {
+        const loginPage = new LoginPage(page);
+        const dashboardPage = new DashboardPage(page);
+
+        await loginPage.goto();
+        await loginPage.login('standard_user', 'secret_sauce');
+        await dashboardPage.verifyLoaded();
+
+        await expect(page).toHaveURL(/inventory/);
+    });
+
 });
 
 /*test('user can login with valid credentials', async ({ page }) => {
