@@ -6,6 +6,7 @@ class DashboardPage {
         this.menuButton = page.locator('#react-burger-menu-btn');
         this.logoutLink = page.locator('#logout_sidebar_link');
         this.firstAddToCartButton = page.locator('[data-test="add-to-cart"]');
+        this.proceedToCheckoutButton = page.locator('[data-test="checkout"]');
 
     }
     async verifyLoaded() {
@@ -17,6 +18,11 @@ class DashboardPage {
     async goToShoppingCart() {
         await this.shoppingCartLink.click();
     }
+    async proceedToCheckout() {
+        await this.proceedToCheckoutButton.click();
+
+    }
+
     async logout() {
         await this.menuButton.click();
         await this.logoutLink.click();
