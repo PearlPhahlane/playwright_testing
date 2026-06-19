@@ -4,6 +4,7 @@ const { DashboardPage } = require ('../pages/DashboardPage');
 const { validUser, invalidUser, checkoutInfo } = require ('../utils/testData');
 const { CheckoutPage } = require('../pages/CheckoutPage');
 
+//test to check if user can login with valid credentials
 test.describe('Login tests', () => {
     test('user can login with valid credentials', async ( {page}) => {
         const loginPage = new LoginPage(page);
@@ -14,6 +15,7 @@ test.describe('Login tests', () => {
         await expect(page).toHaveURL(/inventory/);
     });
 
+//test if user cannot login with invalid credentials
    test('user cannot login with invalid credentials', async ( { page}) => {
         const loginPage = new LoginPage(page);
         
@@ -48,7 +50,7 @@ test.describe('Login tests', () => {
         await expect(page).toHaveURL('https://www.saucedemo.com/');
     })
 
-    //test to see if user can add items to cart and proceed to checkout
+    //test to see if user can add backpack to cart and proceed to checkout
     test('Checkout test', async ( {page} ) => {
         const loginPage = new LoginPage(page);
         const dashboardPage = new DashboardPage(page);
@@ -63,8 +65,8 @@ test.describe('Login tests', () => {
         await dashboardPage.proceedToCheckout();
         await checkoutPage.fillCheckoutInfo(checkoutInfo.firstName, checkoutInfo.lastName, checkoutInfo.postalCode);
         await checkoutPage.continueToOverview();
-        await verifyOverviewPage();
-        await finishCheckout();
+        await checkoutPage.verifyOverviewPage();
+        await checkoutPage.finishCheckout();
 
         await expect(page).toHaveURL(/checkout-complete/);
 
